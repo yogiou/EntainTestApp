@@ -11,6 +11,7 @@ import jie.wen.entaintestapp.data.Constants.Companion.MAX_TO_SHOW
 import jie.wen.entaintestapp.data.Constants.Companion.METHOD
 import jie.wen.entaintestapp.data.Constants.Companion.NEXT_COUNT
 import jie.wen.entaintestapp.data.Constants.Companion.ONE_MINUTE
+import jie.wen.entaintestapp.data.Constants.Companion.ONE_MINUTE_IN_SECOND
 import jie.wen.entaintestapp.data.Constants.Companion.ONE_SECOND
 import jie.wen.entaintestapp.data.RaceListState
 import jie.wen.entaintestapp.data.enum_data.RaceCategory
@@ -103,8 +104,7 @@ class RaceListViewModel @Inject constructor(
     }
 
     fun isInValid(data: RaceSummaryDTO): Boolean {
-        return System.currentTimeMillis() / ONE_SECOND > (data.advertisedStart?.seconds ?: 0) ||
-                System.currentTimeMillis() / ONE_SECOND - (data.advertisedStart?.seconds ?: 0) > ONE_MINUTE
+        return System.currentTimeMillis() / ONE_SECOND - (data.advertisedStart?.seconds ?: 0) > ONE_MINUTE_IN_SECOND
     }
 
     private fun sort(list: List<RaceSummaryDTO>): List<RaceSummaryDTO> {

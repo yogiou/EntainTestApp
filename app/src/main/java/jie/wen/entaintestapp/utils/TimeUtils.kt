@@ -1,5 +1,6 @@
 package jie.wen.entaintestapp.utils
 
+import jie.wen.entaintestapp.data.Constants.Companion.ONE_MINUTE_IN_SECOND
 import jie.wen.entaintestapp.data.Constants.Companion.ONE_SECOND
 import kotlin.math.abs
 
@@ -19,13 +20,13 @@ class TimeUtils {
 
             val timeDifferenceInSeconds = abs(currentTime - targetTime)
 
-            val minutes = timeDifferenceInSeconds / 60
-            val seconds = timeDifferenceInSeconds % 60
+            val minutes = timeDifferenceInSeconds / ONE_MINUTE_IN_SECOND
+            val seconds = timeDifferenceInSeconds % ONE_MINUTE_IN_SECOND
 
             return if (minutes > 0)
                 "$leadingSign${minutes}$min ${seconds}$sec"
             else
-                "$leadingSign${seconds}$min"
+                "$leadingSign${seconds}$sec"
         }
     }
 }
