@@ -7,7 +7,9 @@ class TimeUtils {
     companion object {
         fun showCountDownTime (
             currentTime: Long = System.currentTimeMillis() / ONE_SECOND,
-            targetTime: Long
+            targetTime: Long,
+            min: String = "m",
+            sec: String = "s"
         ): String {
             val leadingSign = if (targetTime < currentTime) {
                "-"
@@ -21,9 +23,9 @@ class TimeUtils {
             val seconds = timeDifferenceInSeconds % 60
 
             return if (minutes > 0)
-                "$leadingSign${minutes}m ${seconds}s"
+                "$leadingSign${minutes}$min ${seconds}$sec"
             else
-                "$leadingSign${seconds}s"
+                "$leadingSign${seconds}$min"
         }
     }
 }

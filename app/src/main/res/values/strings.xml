@@ -4,6 +4,8 @@
     <string name="race_number">Race number:</string>
     <string name="greyhound_racing">Greyhound Racing</string>
     <string name="harness_racing">Harness Racing</string>
-    <string name="hourse_racing">Horse Racing</string>
+    <string name="horse_racing">Horse Racing</string>
     <string name="all">All</string>
+    <string name="min">m</string>
+    <string name="sec">s</string>
 </resources>

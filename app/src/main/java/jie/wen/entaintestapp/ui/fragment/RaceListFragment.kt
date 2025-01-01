@@ -153,7 +153,7 @@ fun FilterButton(raceCategory: RaceCategory, viewModel: RaceListViewModel) {
             text = when(raceCategory) {
                 RaceCategory.GREYHOUND_RACING -> stringResource(R.string.greyhound_racing)
                 RaceCategory.HARNESS_RACING -> stringResource(R.string.harness_racing)
-                RaceCategory.HORSE_RACING -> stringResource(R.string.hourse_racing)
+                RaceCategory.HORSE_RACING -> stringResource(R.string.horse_racing)
                 else -> stringResource(R.string.all)
             },
             fontSize = 16.sp,
@@ -227,7 +227,9 @@ fun RowRight(raceSummaryDTO: RaceSummaryDTO) {
         modifier = Modifier.padding(10.dp)
     ) {
         Text(
-            text = raceSummaryDTO.countDown ?: "",
+            text = raceSummaryDTO.countDown
+                ?.replace("m", stringResource(R.string.min))
+                ?.replace("s", stringResource(R.string.sec))?: "",
             textAlign = TextAlign.End,
             fontSize = 16.sp,
             fontWeight = FontWeight.Normal,
