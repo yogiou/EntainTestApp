@@ -25,6 +25,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.util.concurrent.atomic.AtomicInteger
 import javax.inject.Inject
 
 @HiltViewModel
@@ -36,7 +37,7 @@ class RaceListViewModel @Inject constructor(
 
     private lateinit var cache: Response<ResponseDTO>
 
-    private var count = 0
+    private var count: AtomicInteger = AtomicInteger(0)
 
     var uiState by mutableStateOf(RaceListState())
         private set
@@ -50,13 +51,14 @@ class RaceListViewModel @Inject constructor(
                   refreshTimeInterval: Int) = viewModelScope.launch {
         flow {
             while (true) {
-                if (count % refreshTimeInterval == 0 || raceSummaryDTOMap[RaceCategory.ALL]?.isEmpty() == true) {
+                if (count.get() % refreshTimeInterval == 0 || raceSummaryDTOMap[RaceCategory.ALL]?.isEmpty() == true) {
                     emit(apiHelper.fetchNextNRaceSummaryData(METHOD, NEXT_COUNT))
+                    count.set(0)
                 } else {
                     emit(cache)
                 }
 
-                count++
+                count.set(count.get() + 1)
                 delay(refreshApiInterval)
             }
         }.catch { _ ->
